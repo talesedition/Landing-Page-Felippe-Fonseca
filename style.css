@@ -292,7 +292,7 @@ body {
   width: 100vw;
   height: auto;
   min-height: 400px;
-  max-height: 70vh;
+  max-height: 60vh;
   overflow: hidden;
   background: #0A0A0A;
   margin: 0;
@@ -309,7 +309,7 @@ body {
   width: 100%;
   height: auto;
   min-height: 400px;
-  max-height: 70vh;
+  max-height: 60vh;
   object-fit: cover;
   object-position: top center;
   display: block;
@@ -357,7 +357,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 20px 20px 48px;
+  padding: 32px 20px 48px;
   background: #0A0A0A;
   margin: 0 auto;
   position: relative;
@@ -472,7 +472,7 @@ body {
 }
 
 /* =========================
-   SECTIONS - MOBILE
+   SECTIONS - MOBILE (CORREÇÃO: SEM SOBREPOSIÇÃO)
    ========================= */
 .section {
   position: relative;
@@ -488,19 +488,22 @@ body {
 .section-image-wrapper {
   width: 100%;
   height: auto;
-  min-height: 300px;
-  max-height: 60vh;
+  min-height: 350px;
+  max-height: 50vh;
   overflow: hidden;
   position: relative;
   background: #0A0A0A;
   order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .section-image {
   width: 100%;
   height: auto;
-  min-height: 300px;
-  max-height: 60vh;
+  max-height: 45vh;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -508,11 +511,12 @@ body {
 
 .section-content-wrapper {
   position: relative;
-  padding: 0 20px;
-  margin-top: -60px;
+  padding: 40px 20px;
   z-index: 10;
   order: 2;
   width: 100%;
+  /* CORREÇÃO: Removido margin-top negativo que fazia o card "atacar" a imagem */
+  margin-top: 0;
 }
 
 .glass-card {
@@ -530,7 +534,7 @@ body {
   margin: 0 auto;
   position: relative;
   z-index: 15;
-  box-shadow: 0 -20px 60px rgba(0,0,0,0.9);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .glass-card > * {
@@ -1199,33 +1203,35 @@ body {
    ========================= */
 @media (min-width: 641px) {
   .hero-image-mobile {
-    min-height: 500px;
-    max-height: 80vh;
+    min-height: 450px;
+    max-height: 55vh;
   }
 
   .hero-image-mobile img {
-    min-height: 500px;
-    max-height: 80vh;
+    min-height: 450px;
+    max-height: 55vh;
   }
 
   .hero-content {
-    padding: 24px 32px 64px;
+    padding: 40px 32px 64px;
     max-width: 700px;
   }
 
+  /* CORREÇÃO: Ajuste tablet sem sobreposição */
   .section-image-wrapper {
     min-height: 400px;
-    max-height: 70vh;
+    max-height: 55vh;
+    padding: 30px;
   }
 
   .section-image {
-    min-height: 400px;
-    max-height: 70vh;
+    max-height: 50vh;
   }
 
   .section-content-wrapper {
-    padding: 0 32px;
-    margin-top: -80px;
+    padding: 50px 32px;
+    /* CORREÇÃO: Sem margin negativa */
+    margin-top: 0;
   }
 
   .glass-card {
@@ -1299,13 +1305,6 @@ body {
     object-position: center top;
   }
 
-  .hero-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(1, 204, 101, 0.2) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
   /* Container do hero - lado direito */
   .hero-container {
     flex-direction: row;
@@ -1351,32 +1350,35 @@ body {
   .section {
     flex-direction: row;
     align-items: center;
-    min-height: 100vh;
-    padding: 60px 5%;
+    min-height: auto;
+    padding: 80px 5%;
+    gap: 60px;
   }
 
   .section-image-wrapper {
-    width: 50%;
-    height: 100%;
+    width: 45%;
+    height: auto;
     min-height: unset;
     max-height: unset;
     order: unset;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    /* CORREÇÃO: Sem limitação de altura excessiva */
   }
 
   .section-image {
     width: 100%;
     height: auto;
-    max-height: 80vh;
+    max-height: 70vh;
     min-height: unset;
     object-fit: contain;
   }
 
   .section-content-wrapper {
-    width: 50%;
-    padding: 0 40px;
+    width: 55%;
+    padding: 0;
     margin-top: 0;
     order: unset;
     display: flex;
@@ -1388,6 +1390,8 @@ body {
     max-width: 600px;
     padding: 48px;
     margin: 0;
+    /* CORREÇÃO: Sombra mais suave */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
   }
 
   /* Alterna lado da imagem em seções ímpares */
@@ -1474,7 +1478,8 @@ body {
   }
 
   .section {
-    padding: 80px 10%;
+    padding: 100px 10%;
+    gap: 80px;
   }
 
   .glass-card {
