@@ -1,5 +1,5 @@
 /**
- * Matemática do Zero para Concursos - Landing Page
+ * Combo Matemática para Concursos - Landing Page
  * JavaScript para animações e interatividade
  */
 
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
           entry.target.classList.add('animate-visible');
         }, delay);
         
-        // Unobserve after animation
         observer.unobserve(entry.target);
       }
     });
@@ -64,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   ctaButtons.forEach(button => {
     button.addEventListener('click', function(e) {
-      // Add ripple effect
       const ripple = document.createElement('span');
       ripple.style.cssText = `
         position: absolute;
@@ -108,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    // Add shadow to sections when scrolling
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
@@ -139,32 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
   images.forEach(img => imageObserver.observe(img));
   
   // =========================
-  // FORM VALIDATION (if needed)
-  // =========================
-  const forms = document.querySelectorAll('form');
-  
-  forms.forEach(form => {
-    form.addEventListener('submit', function(e) {
-      const requiredFields = form.querySelectorAll('[required]');
-      let isValid = true;
-      
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          isValid = false;
-          field.classList.add('error');
-        } else {
-          field.classList.remove('error');
-        }
-      });
-      
-      if (!isValid) {
-        e.preventDefault();
-      }
-    });
-  });
-  
-  // =========================
-  // DEPOIMENTOS CARROSSEL - CORREÇÃO PARA 3 SLIDES
+  // DEPOIMENTOS CARROSSEL
   // =========================
   const carousel = document.getElementById('depoimentosCarousel');
   const track = document.getElementById('depoimentosTrack');
@@ -172,41 +144,33 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (carousel && track && dots.length > 0) {
     let currentIndex = 0;
-    const totalSlides = 3; // CORREÇÃO: Agora são apenas 3 slides
+    const totalSlides = 3;
     let intervalId;
     let isPaused = false;
     
-    // Função para ir para um slide específico
     function goToSlide(index) {
       currentIndex = index;
-      // CORREÇÃO: Cálculo correto do translateX para 3 slides
-      // Cada slide ocupa 33.333% do track, então movemos em múltiplos de 33.333%
       const translateX = -(currentIndex * 33.333);
       track.style.transform = `translateX(${translateX}%)`;
       
-      // Atualiza os dots
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndex);
       });
     }
     
-    // Função para próximo slide
     function nextSlide() {
       const nextIndex = (currentIndex + 1) % totalSlides;
       goToSlide(nextIndex);
     }
     
-    // Inicia o carrossel automático
     function startAutoplay() {
-      intervalId = setInterval(nextSlide, 4000); // Muda a cada 4 segundos
+      intervalId = setInterval(nextSlide, 4000);
     }
     
-    // Para o carrossel
     function stopAutoplay() {
       clearInterval(intervalId);
     }
     
-    // Event listeners para pausar no hover
     carousel.addEventListener('mouseenter', () => {
       isPaused = true;
       stopAutoplay();
@@ -217,11 +181,9 @@ document.addEventListener('DOMContentLoaded', function() {
       startAutoplay();
     });
     
-    // Event listeners para os dots
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         goToSlide(index);
-        // Reseta o intervalo quando clicado manualmente
         if (!isPaused) {
           stopAutoplay();
           startAutoplay();
@@ -229,56 +191,30 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Inicializa no primeiro slide
     goToSlide(0);
-    
-    // Inicia automaticamente
     startAutoplay();
-  }
-  
-  // =========================
-  // ORDER BUMP INTERACTION
-  // =========================
-  const orderBumpCheck = document.getElementById('orderBumpCheck');
-  const ctaFinal = document.getElementById('cta-final');
-  
-  if (orderBumpCheck && ctaFinal) {
-    orderBumpCheck.addEventListener('change', function() {
-      // Atualiza o link do CTA com base na seleção do order bump
-      // Você pode modificar o href aqui para incluir o order bump na URL
-      if (this.checked) {
-        // Adiciona parâmetro do order bump ao link
-        const currentHref = ctaFinal.getAttribute('href');
-        if (!currentHref.includes('order_bump=true')) {
-          ctaFinal.setAttribute('href', currentHref + '&order_bump=true');
-        }
-        console.log('Order bump adicionado!');
-      } else {
-        // Remove o parâmetro do order bump
-        const currentHref = ctaFinal.getAttribute('href');
-        ctaFinal.setAttribute('href', currentHref.replace('&order_bump=true', ''));
-        console.log('Order bump removido!');
-      }
-    });
   }
   
   // =========================
   // ANALYTICS TRACKING
   // =========================
-  // Track CTA clicks
   const ctaHero = document.getElementById('cta-hero');
+  const ctaFinal = document.getElementById('cta-final');
   
   if (ctaHero) {
     ctaHero.addEventListener('click', () => {
       if (typeof gtag !== 'undefined') {
         gtag('event', 'click', {
           event_category: 'CTA',
-          event_label: 'Hero Button'
+          event_label: 'Hero Button - Combo'
         });
       }
       
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout');
+        fbq('track', 'InitiateCheckout', {
+          value: 33.12,
+          currency: 'BRL'
+        });
       }
     });
   }
@@ -288,12 +224,17 @@ document.addEventListener('DOMContentLoaded', function() {
       if (typeof gtag !== 'undefined') {
         gtag('event', 'click', {
           event_category: 'CTA',
-          event_label: 'Final Button'
+          event_label: 'Final Button - Combo'
         });
       }
       
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'Purchase', { value: 23.97, currency: 'BRL' });
+        fbq('track', 'Purchase', { 
+          value: 33.12, 
+          currency: 'BRL',
+          content_ids: ['combo-matematica'],
+          content_type: 'product'
+        });
       }
     });
   }
@@ -301,7 +242,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // =========================
   // PERFORMANCE OPTIMIZATION
   // =========================
-  // Preload critical resources
   const preloadLinks = [
     'img/felippe-hero-desktop.png',
     'img/felippe-hero-mobile.png'
@@ -315,11 +255,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(link);
   });
   
-  console.log('🚀 Landing Page do Prof. Felippe Carregada com Sucesso!');
+  console.log('🚀 Combo Matemática para Concursos - Landing Page Carregada!');
 });
 
 // =========================
-// CSS ANIMATION KEYFRAMES (injected via JS)
+// CSS ANIMATION KEYFRAMES
 // =========================
 const style = document.createElement('style');
 style.textContent = `
