@@ -164,22 +164,24 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // =========================
-  // DEPOIMENTOS CARROSSEL - ATUALIZADO PARA 3 SLIDES
+  // DEPOIMENTOS CARROSSEL - CORREÇÃO PARA 3 SLIDES
   // =========================
   const carousel = document.getElementById('depoimentosCarousel');
   const track = document.getElementById('depoimentosTrack');
   const dots = document.querySelectorAll('.dot');
   
-  if (carousel && track) {
+  if (carousel && track && dots.length > 0) {
     let currentIndex = 0;
-    const totalSlides = 3; // Atualizado para 3 depoimentos
+    const totalSlides = 3; // CORREÇÃO: Agora são apenas 3 slides
     let intervalId;
     let isPaused = false;
     
     // Função para ir para um slide específico
     function goToSlide(index) {
       currentIndex = index;
-      const translateX = -(currentIndex * (100 / totalSlides));
+      // CORREÇÃO: Cálculo correto do translateX para 3 slides
+      // Cada slide ocupa 33.333% do track, então movemos em múltiplos de 33.333%
+      const translateX = -(currentIndex * 33.333);
       track.style.transform = `translateX(${translateX}%)`;
       
       // Atualiza os dots
@@ -226,6 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+    
+    // Inicializa no primeiro slide
+    goToSlide(0);
     
     // Inicia automaticamente
     startAutoplay();

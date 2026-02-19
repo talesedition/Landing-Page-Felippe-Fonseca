@@ -19,6 +19,8 @@
   --gold-dark: #f59e0b;
   --success: #01CC65;
   --danger: #ef4444;
+  --orange: #f97316;
+  --orange-dark: #ea580c;
 
   --radius: 0.625rem;
   --background: #0A0A0A;
@@ -155,6 +157,15 @@ body {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes pulse-orange {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
   }
 }
 
@@ -633,6 +644,265 @@ body {
 }
 
 /* =========================
+   COBERTURA COMPLETA - NOVA SEÇÃO
+   ========================= */
+.cobertura-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.cobertura-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.cobertura-card:hover {
+  background: rgba(1, 204, 101, 0.08);
+  border-color: rgba(1, 204, 101, 0.3);
+  transform: translateY(-2px);
+}
+
+.cobertura-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.cobertura-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #F6F6F6;
+  margin-bottom: 12px;
+}
+
+.cobertura-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cobertura-list li {
+  color: #9ca3af;
+  font-size: 14px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.cobertura-list li::before {
+  content: '•';
+  color: #01CC65;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.cobertura-destaque {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(1, 204, 101, 0.15) 0%, rgba(0, 255, 127, 0.05) 100%);
+  border: 1px solid rgba(1, 204, 101, 0.3);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.cobertura-destaque-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.cobertura-destaque-text {
+  color: #d1d5db;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cobertura-destaque-text strong {
+  color: #01CC65;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+/* =========================
+   ORDER BUMP
+   ========================= */
+.order-bump-card {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(234, 88, 12, 0.05) 100%);
+  border: 2px dashed rgba(249, 115, 22, 0.6);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  position: relative;
+  animation: pulse-orange 2s infinite;
+}
+
+.order-bump-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.order-bump-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.order-bump-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #f97316;
+  margin: 0;
+}
+
+.order-bump-description {
+  color: #d1d5db;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.order-bump-description strong {
+  color: #F6F6F6;
+}
+
+.order-bump-pricing {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.order-bump-old-price {
+  color: #6b7280;
+  font-size: 16px;
+  text-decoration: line-through;
+  text-decoration-color: #ef4444;
+  text-decoration-thickness: 2px;
+  margin-bottom: 4px;
+}
+
+.order-bump-new-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.order-bump-currency {
+  color: #f97316;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-bump-amount {
+  font-size: 36px;
+  font-weight: 900;
+  color: #f97316;
+  line-height: 1;
+}
+
+.order-bump-cents {
+  color: #f97316;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.order-bump-economy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.order-bump-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 16px;
+  background: rgba(249, 115, 22, 0.1);
+  border: 2px solid rgba(249, 115, 22, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.order-bump-checkbox:hover {
+  background: rgba(249, 115, 22, 0.2);
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.order-bump-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(249, 115, 22, 0.5);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+
+.order-bump-checkbox input:checked ~ .checkmark {
+  background: #f97316;
+  border-color: #f97316;
+}
+
+.order-bump-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.order-bump-label-text {
+  color: #F6F6F6;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* =========================
    FEATURES GRID
    ========================= */
 .features-grid {
@@ -783,7 +1053,7 @@ body {
 }
 
 /* =========================
-   DEPOIMENTOS CARROSSEL
+   DEPOIMENTOS CARROSSEL - CORREÇÃO 3 SLIDES
    ========================= */
 .section-depoimentos {
   min-height: auto;
@@ -812,11 +1082,11 @@ body {
 .depoimentos-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  width: 600%;
+  width: 300%; /* 3 slides × 100% */
 }
 
 .depoimento-slide {
-  width: 16.666%;
+  width: 33.333%; /* 100% ÷ 3 slides */
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1264,6 +1534,17 @@ body {
     line-height: 1.5;
   }
 
+  /* Cobertura tablet */
+  .cobertura-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* Order bump tablet */
+  .order-bump-card {
+    padding: 32px;
+  }
+
   /* Depoimentos tablet */
   .depoimentos-carousel {
     max-width: 450px;
@@ -1433,6 +1714,28 @@ body {
     width: 6px;
     height: 6px;
     margin-top: 8px;
+  }
+
+  /* Cobertura desktop */
+  .cobertura-grid {
+    gap: 24px;
+  }
+
+  .cobertura-card {
+    padding: 28px;
+  }
+
+  .cobertura-destaque {
+    padding: 24px;
+  }
+
+  /* Order bump desktop */
+  .order-bump-card {
+    padding: 32px;
+  }
+
+  .order-bump-title {
+    font-size: 1.5rem;
   }
 
   /* Depoimentos desktop */
