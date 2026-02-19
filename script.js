@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // =========================
-  // DEPOIMENTOS CARROSSEL
+  // DEPOIMENTOS CARROSSEL - ATUALIZADO PARA 3 SLIDES
   // =========================
   const carousel = document.getElementById('depoimentosCarousel');
   const track = document.getElementById('depoimentosTrack');
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (carousel && track) {
     let currentIndex = 0;
-    const totalSlides = 6;
+    const totalSlides = 3; // Atualizado para 3 depoimentos
     let intervalId;
     let isPaused = false;
     
@@ -232,11 +232,36 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // =========================
+  // ORDER BUMP INTERACTION
+  // =========================
+  const orderBumpCheck = document.getElementById('orderBumpCheck');
+  const ctaFinal = document.getElementById('cta-final');
+  
+  if (orderBumpCheck && ctaFinal) {
+    orderBumpCheck.addEventListener('change', function() {
+      // Atualiza o link do CTA com base na seleção do order bump
+      // Você pode modificar o href aqui para incluir o order bump na URL
+      if (this.checked) {
+        // Adiciona parâmetro do order bump ao link
+        const currentHref = ctaFinal.getAttribute('href');
+        if (!currentHref.includes('order_bump=true')) {
+          ctaFinal.setAttribute('href', currentHref + '&order_bump=true');
+        }
+        console.log('Order bump adicionado!');
+      } else {
+        // Remove o parâmetro do order bump
+        const currentHref = ctaFinal.getAttribute('href');
+        ctaFinal.setAttribute('href', currentHref.replace('&order_bump=true', ''));
+        console.log('Order bump removido!');
+      }
+    });
+  }
+  
+  // =========================
   // ANALYTICS TRACKING
   // =========================
   // Track CTA clicks
   const ctaHero = document.getElementById('cta-hero');
-  const ctaFinal = document.getElementById('cta-final');
   
   if (ctaHero) {
     ctaHero.addEventListener('click', () => {
