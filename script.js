@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctaHero = document.getElementById('cta-hero');
   const ctaFinal = document.getElementById('cta-final');
   
+  // Tracking para botão principal do hero (Combo)
   if (ctaHero) {
     ctaHero.addEventListener('click', () => {
       if (typeof gtag !== 'undefined') {
@@ -213,12 +214,15 @@ document.addEventListener('DOMContentLoaded', function() {
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', {
           value: 33.12,
-          currency: 'BRL'
+          currency: 'BRL',
+          content_ids: ['combo-matematica'],
+          content_type: 'product'
         });
       }
     });
   }
   
+  // Tracking para botão final (Combo)
   if (ctaFinal) {
     ctaFinal.addEventListener('click', () => {
       if (typeof gtag !== 'undefined') {
@@ -238,6 +242,39 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+  
+  // Tracking para botões individuais
+  const individualButtons = document.querySelectorAll('a[href*="G104531293F"], a[href*="G104532014X"]');
+  
+  individualButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const href = button.getAttribute('href');
+      let productName = '';
+      let value = 18.40;
+      
+      if (href.includes('G104531293F')) {
+        productName = 'Matematica do Zero';
+      } else if (href.includes('G104532014X')) {
+        productName = '100 Questoes Comentadas';
+      }
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'click', {
+          event_category: 'CTA',
+          event_label: `Individual Button - ${productName}`
+        });
+      }
+      
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          value: value,
+          currency: 'BRL',
+          content_ids: [productName.toLowerCase().replace(/\s+/g, '-')],
+          content_type: 'product'
+        });
+      }
+    });
+  });
   
   // =========================
   // PERFORMANCE OPTIMIZATION
